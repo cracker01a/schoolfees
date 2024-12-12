@@ -51,20 +51,12 @@
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="html/user-list-regular.html" class="nk-menu-link"><span class="nk-menu-text">User List - Regular</span></a>
+                                <a href="{{ route('users.create') }}l" class="nk-menu-link"><span class="nk-menu-text">Ajout</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="html/user-list-compact.html" class="nk-menu-link"><span class="nk-menu-text">User List - Compact</span></a>
+                                <a href="{{ route('users.index') }}" class="nk-menu-link"><span class="nk-menu-text">List</span></a>
                             </li>
-                            <li class="nk-menu-item">
-                                <a href="html/user-details-regular.html" class="nk-menu-link"><span class="nk-menu-text">User Details - Regular</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/user-profile-regular.html" class="nk-menu-link"><span class="nk-menu-text">User Profile - Regular</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/user-card.html" class="nk-menu-link"><span class="nk-menu-text">User Contact - Card</span></a>
-                            </li>
+                            
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item has-sub">

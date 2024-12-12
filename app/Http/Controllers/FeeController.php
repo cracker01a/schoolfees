@@ -20,7 +20,9 @@ class FeeController extends Controller
 
     public function create()
     {
+        
         $classes = Classe::all(); // Récupérer toutes les classes
+          // dd($classes);
         return view('fees.create', compact('classes'));
     }
 
