@@ -64,9 +64,18 @@
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
-                                    <li><a href="#"><em class="icon ni ni-signout"></em><span>Sign out</span></a></li>
+                                    <!-- Formulaire de déconnexion -->
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item">
+                                                <em class="icon ni ni-signout"></em><span>Sign out</span>
+                                            </button>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
+
                         </div>
                     </li><!-- .dropdown -->
                     <li class="dropdown notification-dropdown me-n1">

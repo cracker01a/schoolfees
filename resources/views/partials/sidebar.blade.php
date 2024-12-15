@@ -20,63 +20,68 @@
                         <h6 class="overline-title text-primary-alt">Dashboards</h6>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item">
-                        <a href="html/index.html" class="nk-menu-link">
+                        <a href="{{ route('bb') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-dashlite"></em></span>
                             <span class="nk-menu-text">Default Dashboard</span>
                         </a>
                     </li><!-- .nk-menu-item -->
 
                     
-                    <li class="nk-menu-heading">
-                        <h6 class="overline-title text-primary-alt">paiements</h6>
-                    </li><!-- .nk-menu-heading -->
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
-                            <span class="nk-menu-text">frais de scolarite</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="{{ route('fees.create') }}" class="nk-menu-link"><span class="nk-menu-text">Ajout</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="{{ route('fees.index') }}" class="nk-menu-link"><span class="nk-menu-text">List</span></a>
-                            </li>
-                        </ul><!-- .nk-menu-sub -->
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
-                            <span class="nk-menu-text">User Manage</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="{{ route('users.create') }}l" class="nk-menu-link"><span class="nk-menu-text">Ajout</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="{{ route('users.index') }}" class="nk-menu-link"><span class="nk-menu-text">List</span></a>
-                            </li>
-                            
-                        </ul><!-- .nk-menu-sub -->
-                    </li><!-- .nk-menu-item -->
+                                        <!-- Vérifie si l'utilisateur n'est pas un parent -->
+                        @if(auth()->user()->status !== 'parent')
+                            <li class="nk-menu-heading">
+                                <h6 class="overline-title text-primary-alt">paiements</h6>
+                            </li><!-- .nk-menu-heading -->
+                            <li class="nk-menu-item has-sub">
+                                <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
+                                    <span class="nk-menu-text">frais de scolarite</span>
+                                </a>
+                                <ul class="nk-menu-sub">
+                                    <li class="nk-menu-item">
+                                        <a href="{{ route('fees.create') }}" class="nk-menu-link"><span class="nk-menu-text">Ajout</span></a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="{{ route('fees.index') }}" class="nk-menu-link"><span class="nk-menu-text">List</span></a>
+                                    </li>
+                                </ul><!-- .nk-menu-sub -->
+                            </li><!-- .nk-menu-item -->
+                            <li class="nk-menu-item has-sub">
+                                <a href="#" class="nk-menu-link nk-menu-toggle">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
+                                    <span class="nk-menu-text">User Manage</span>
+                                </a>
+                                <ul class="nk-menu-sub">
+                                    <li class="nk-menu-item">
+                                        <a href="{{ route('users.create') }}" class="nk-menu-link"><span class="nk-menu-text">Ajout</span></a>
+                                    </li>
+                                    <li class="nk-menu-item">
+                                        <a href="{{ route('users.index') }}" class="nk-menu-link"><span class="nk-menu-text">List</span></a>
+                                    </li>
+                                </ul><!-- .nk-menu-sub -->
+                            </li><!-- .nk-menu-item -->
+                        @endif
+
+                        @if(auth()->user()->status !== 'comptable')
+
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
                             <span class="nk-menu-icon"><em class="icon ni ni-user-list"></em></span>
-                            <span class="nk-menu-text">Customers</span>
+                            <span class="nk-menu-text">Enregistrement</span>
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="html/customer-list.html" class="nk-menu-link"><span class="nk-menu-text">Customer List</span></a>
+                                <a href="{{ route('children.index') }}" class="nk-menu-link"><span class="nk-menu-text">Ajout</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="html/customer-details.html" class="nk-menu-link"><span class="nk-menu-text">Customer Details</span></a>
+                                <a href="html/customer-details.html" class="nk-menu-link"><span class="nk-menu-text">list</span></a>
                             </li>
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
                             <span class="nk-menu-icon"><em class="icon ni ni-file-docs"></em></span>
-                            <span class="nk-menu-text">AML / KYCs</span>
+                            <span class="nk-menu-text">paiements cles</span>
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
@@ -87,6 +92,7 @@
                             </li>
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->
+                    @endif
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
                             <span class="nk-menu-icon"><em class="icon ni ni-tranx"></em></span>

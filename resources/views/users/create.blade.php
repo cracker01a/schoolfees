@@ -1,6 +1,12 @@
 @extends('partials.master')
 
 @section('content')
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 <div class="card card-bordered">
     <div class="card-inner">
         <div class="card-head">
@@ -58,7 +64,7 @@
                     <div class="form-group">
                         <label class="form-label" for="number">Numéro</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="number" name="user[0][number]" placeholder="Ex : 123456789" value="{{ old('user.0.number') }}">
+                            <input type="number" class="form-control" id="number" name="user[0][number]" placeholder="Ex : 123456789" value="{{ old('user.0.number') }}">
                         </div>
                     </div>
                 </div>
