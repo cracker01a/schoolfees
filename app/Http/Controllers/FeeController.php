@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Child;
 use App\Models\Fee;
 use App\Models\Classe;
+use App\Models\User;
+
 
 
 use Illuminate\Http\Request;
@@ -75,4 +79,59 @@ class FeeController extends Controller
         $fee->delete();
         return redirect()->route('fees.index')->with('success', 'Frais supprimé avec succès');
     }
+
+    public function index2()
+    {
+        // Récupère toutes les classes avec leurs frais associés
+        $classes = Classe::with('fees')->get();
+
+        // Retourne la vue avec les données
+        return view('classe.index', compact('classes'));
+    }
+    
+    public function show($id)
+    {
+        // Récupérer l'utilisateur avec l'ID fourni
+        $user = User::find($id);
+        $fees = Fee::all();
+        //dd($fees);
+
+
+        // Vérifier si l'utilisateur existe et a le statut "parent"
+        if (!$user || $user->status !== 'parent') {
+            return response()->json(['message' => 'User not found or not a parent'], 404);
+        }
+
+        // Récupérer les enfants de l'utilisateur (parent) avec leurs classes et frais
+        $children = $user->children()->with('classe.fees')->get();
+
+        // Retourner la vue avec les données
+        return view('frais.index', compact('children','fees'));
+    }
+    public function showFees()
+{
+    // Récupérer le parent connecté
+    $parentId = auth()->user()->id;
+
+    // Récupérer les enfants liés à ce parent
+    $children = Child::where('parent_id', $parentId)->get();
+
+    // Récupérer les frais liés aux classes des enfants
+    $fees = [];
+    foreach ($children as $child) {
+        $fees[$child->class_id] = Fee::where('class_id', $child->class_id)->get();
+    }
+
+    return view('frais.pay', compact('children', 'fees'));
+}
+public function pay($classId)
+{
+    // Récupérer les frais de la classe
+    $fees = Fee::where('class_id', $classId)->get();
+
+    // Exemple : rediriger vers une page de paiement (ou traitement)
+    return view('frais.process', compact('fees', 'classId'));
+}
+
+
 }

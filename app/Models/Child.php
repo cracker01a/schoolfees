@@ -15,4 +15,5 @@ class Child extends Model
     {
         return $this->belongsTo(Classe::class, 'class_id');
     }
+    
 }

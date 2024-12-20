@@ -4,16 +4,23 @@
 <head>
     <base href="{{asset('/')}}">
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta name="author" content="Softnio">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="./images/favicon.png">
     <!-- Page Title  -->
-    <title>Sales Dashboard | DashLite Admin Template</title>
+    <title>Schoolfees  | Dashboad </title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="./assets/css/dashlite.css?ver=3.2.3">
+    <!-- Ajoutez ceci dans votre fichier layout principal, ex. partials.master -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
     <link id="skin-default" rel="stylesheet" href="./assets/css/theme.css?ver=3.2.3">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="nk-body bg-lighter npc-general has-sidebar ">
@@ -166,9 +173,18 @@
         </div><!-- .modla-dialog -->
     </div><!-- .modal -->
     <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script src="./assets/js/bundle.js?ver=3.2.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="./assets/js/scripts.js?ver=3.2.3"></script>
+    <script src="https://cdn.kkiapay.me/k.js"></script>
     <script src="./assets/js/charts/gd-default.js?ver=3.2.3"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    @stack('scripts')
 </body>
 
 </html>

@@ -6,56 +6,69 @@
         {{ session('success') }}
     </div>
 @endif
-<div class="nk-block nk-block-lg">
-    <div class="nk-block-head">
-        <div class="nk-block-head-content">
-            <h4 class="nk-block-title">Liste des utilisateurs</h4>
-            <p>Tableau des utilisateurs enregistrés dans le système.</p>
+
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="components-preview wide-md mx-auto">
+                    <div class="nk-block nk-block-lg">
+                        <div class="nk-block-head">
+                            <div class="nk-block-head-content">
+                                <h4 class="nk-block-title">Liste des utilisateurs</h4>
+                                <p>Tableau des utilisateurs enregistrés dans le système.</p>
+                            </div>
+                        </div>
+                        <div class="card card-bordered card-preview">
+                            <table class="table table-orders">
+                                <thead class="tb-odr-head">
+                                    <tr class="tb-odr-item">
+                                        <th class="tb-odr-info">
+                                            <span class="tb-odr-id">ID</span>
+                                            <span class="tb-odr-date d-none d-md-inline-block">Nom</span>
+                                        </th>
+                                        <th class="tb-odr-amount">
+                                            <span class="tb-odr-total">Email</span>
+                                            <span class="tb-odr-status d-none d-md-inline-block">Statut</span>
+                                        </th>
+                                        <th class="tb-odr-action">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tb-odr-body">
+                                    @foreach($users as $user)
+                                    <tr class="tb-odr-item">
+                                        <td class="tb-odr-info">
+                                            <span class="tb-odr-id">#{{ $user->id }}</span>
+                                            <span class="tb-odr-date">{{ $user->firstname }} {{ $user->lastname }}</span>
+                                        </td>
+                                        <td class="tb-odr-amount">
+                                            <span class="tb-odr-total">
+                                                <span class="amount">{{ $user->email }}</span>
+                                            </span>
+                                            <span class="tb-odr-status">
+                                                <span class="badge badge-dot {{ $user->isActive ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ $user->isActive ? 'Actif' : 'Inactif' }}
+                                                </span>
+                                            </span>
+                                        </td>
+                                        <td class="tb-odr-action">
+                                            <div class="tb-odr-btns d-none d-md-inline">
+                                                <button class="btn btn-sm btn-primary view-user" data-id="{{ $user->id }}">View</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div><!-- .card-preview -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="card card-bordered card-preview">
-        <table class="table table-orders">
-            <thead class="tb-odr-head">
-                <tr class="tb-odr-item">
-                    <th class="tb-odr-info">
-                        <span class="tb-odr-id">ID</span>
-                        <span class="tb-odr-date d-none d-md-inline-block">Nom</span>
-                    </th>
-                    <th class="tb-odr-amount">
-                        <span class="tb-odr-total">Email</span>
-                        <span class="tb-odr-status d-none d-md-inline-block">Statut</span>
-                    </th>
-                    <th class="tb-odr-action">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody class="tb-odr-body">
-                @foreach($users as $user)
-                <tr class="tb-odr-item">
-                    <td class="tb-odr-info">
-                        <span class="tb-odr-id">#{{ $user->id }}</span>
-                        <span class="tb-odr-date">{{ $user->firstname }} {{ $user->lastname }}</span>
-                    </td>
-                    <td class="tb-odr-amount">
-                        <span class="tb-odr-total">
-                            <span class="amount">{{ $user->email }}</span>
-                        </span>
-                        <span class="tb-odr-status">
-                            <span class="badge badge-dot {{ $user->isActive ? 'bg-success' : 'bg-danger' }}">
-                                {{ $user->isActive ? 'Actif' : 'Inactif' }}
-                            </span>
-                        </span>
-                    </td>
-                    <td class="tb-odr-action">
-                        <div class="tb-odr-btns d-none d-md-inline">
-                            <button class="btn btn-sm btn-primary view-user" data-id="{{ $user->id }}">View</button>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div><!-- .card-preview -->
 </div>
+                    
+
 
 
 <!-- Modal -->

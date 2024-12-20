@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+use App\Models\RefundRequest;
 use App\Notifications\UserAddedNotification;
 
 use Illuminate\Http\Request;
@@ -22,8 +23,21 @@ class UserController extends Controller
     }
     public function index1()
     {
+        $totalUsers = User::count();
+        $activeUsers = User::where('status', 'active')->count();
+        $totalRefundRequests = RefundRequest::count();
+        $pendingRefunds = RefundRequest::where('status', 'pending')->count();
        
-        return view('welcome');
+    
+        return view('welcome1', compact(
+            'totalUsers',
+            'activeUsers',
+            'totalRefundRequests',
+            'pendingRefunds',
+            
+            
+        ));
+        
     }
     
 
@@ -128,6 +142,41 @@ public function setPassword(Request $request)
     $user->save();
 
     return redirect('/login')->with('success', 'Mot de passe défini avec succès. Connectez-vous maintenant.');
+}
+public function showParents()
+{
+    $parents = User::where('status', 'parent')->get();
+    return view('parents.index', compact('parents'));
+}
+
+
+public function sendEmail(Request $request, $id)
+{
+    $user = User::findOrFail($id);
+    $message = $request->message;
+
+    Mail::to($user->email)->send(new \App\Mail\CustomMessage($message));
+
+    return response()->json(['message' => 'E-mail envoyé avec succès !']);
+}
+
+public function sendWhatsApp(Request $request, $id)
+{
+    $user = User::findOrFail($id);
+    $message = $request->message;
+
+    // Intégration avec l'API Twilio WhatsApp ou une autre solution
+    // Exemple avec Twilio :
+    $twilio = new \Twilio\Rest\Client(env('TWILIO_SID'), env('TWILIO_AUTH_TOKEN'));
+    $twilio->messages->create(
+        'whatsapp:' . $user->phone,
+        [
+            'from' => 'whatsapp:' . env('TWILIO_WHATSAPP_NUMBER'),
+            'body' => $message,
+        ]
+    );
+
+    return response()->json(['message' => 'Message WhatsApp envoyé avec succès !']);
 }
 
 }

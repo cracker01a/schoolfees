@@ -58,4 +58,11 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('login');
     }
+    public function login1()
+    {
+       
+      
+        // Retourne la vue avec la liste des frais
+        return view('auth.login');
+    }
 }
